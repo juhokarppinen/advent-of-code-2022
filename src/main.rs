@@ -1,9 +1,10 @@
 mod day_01;
 mod day_02;
+mod day_03;
 
 /// https://adventofcode.com/2022
 fn main() {
-    let solvers = [day_01::solve, day_02::solve];
+    let solvers = [day_01::solve, day_02::solve, day_03::solve];
 
     for (i, solve) in solvers.iter().enumerate() {
         let day = i + 1;
