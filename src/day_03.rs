@@ -1,36 +1,42 @@
 use std::collections::HashSet;
 
 /// https://adventofcode.com/2022/day/3
-pub fn solve(input: String) -> (i32, i32) {
+pub fn solve(input: String) -> (String, String) {
     (part_1(&input), part_2(&input))
 }
 
-fn part_1(input: &str) -> i32 {
-    input.lines().fold(0, |sum, line| {
-        let (first, second) = line.split_at(line.len() / 2);
-        let first_items = char_set(first);
-        let duplicate = second
-            .chars()
-            .find(|c| first_items.contains(&c))
-            .expect("Should have duplicate");
-        sum + get_priority(duplicate)
-    })
+fn part_1(input: &str) -> String {
+    input
+        .lines()
+        .fold(0, |sum, line| {
+            let (first, second) = line.split_at(line.len() / 2);
+            let first_items = char_set(first);
+            let duplicate = second
+                .chars()
+                .find(|c| first_items.contains(&c))
+                .expect("Should have duplicate");
+            sum + get_priority(duplicate)
+        })
+        .to_string()
 }
 
-fn part_2(input: &str) -> i32 {
+fn part_2(input: &str) -> String {
     let lines: Vec<&str> = input.lines().collect();
-    lines.chunks(3).fold(0, |sum, chunk| {
-        let all = char_set(&chunk.join(""));
-        let unique = all
-            .iter()
-            .find(|c| {
-                char_set(chunk.get(0).unwrap()).contains(c)
-                    && char_set(chunk.get(1).unwrap()).contains(c)
-                    && char_set(chunk.get(2).unwrap()).contains(c)
-            })
-            .expect("Should have same char");
-        sum + get_priority(*unique)
-    })
+    lines
+        .chunks(3)
+        .fold(0, |sum, chunk| {
+            let all = char_set(&chunk.join(""));
+            let unique = all
+                .iter()
+                .find(|c| {
+                    char_set(chunk.get(0).unwrap()).contains(c)
+                        && char_set(chunk.get(1).unwrap()).contains(c)
+                        && char_set(chunk.get(2).unwrap()).contains(c)
+                })
+                .expect("Should have same char");
+            sum + get_priority(*unique)
+        })
+        .to_string()
 }
 
 fn char_set(str: &str) -> HashSet<char> {

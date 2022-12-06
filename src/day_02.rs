@@ -1,26 +1,26 @@
 /// https://adventofcode.com/2022/day/2
-pub fn solve(input: String) -> (i32, i32) {
+pub fn solve(input: String) -> (String, String) {
     (part_1(&input), part_2(&input))
 }
 
-fn part_1(input: &str) -> i32 {
+fn part_1(input: &str) -> String {
     let mut score = 0;
     for line in input.lines() {
         let hands = parse_1(&line);
         let result = get_round_result(&hands);
         score += get_round_score(&result) + get_hand_score(&hands.1);
     }
-    score
+    score.to_string()
 }
 
-fn part_2(input: &str) -> i32 {
+fn part_2(input: &str) -> String {
     let mut score = 0;
     for line in input.lines() {
         let (hand, result) = parse_2(&line);
         let my_hand = get_match_hand((&hand, &result));
         score += get_round_score(&result) + get_hand_score(&my_hand);
     }
-    score
+    score.to_string()
 }
 
 fn parse_1(line: &str) -> (Hand, Hand) {

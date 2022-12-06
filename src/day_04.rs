@@ -1,6 +1,6 @@
 /// https://adventofcode.com/2022/day/4
-pub fn solve(input: String) -> (i32, i32) {
-    input.lines().fold((0, 0), |(part_1, part_2), line| {
+pub fn solve(input: String) -> (String, String) {
+    let (part_1, part_2) = input.lines().fold((0, 0), |(part_1, part_2), line| {
         let [(a, b), (p, q)]: [_; 2] = line
             .split(",")
             .map(parse_range)
@@ -11,7 +11,8 @@ pub fn solve(input: String) -> (i32, i32) {
             part_1 + ((a >= p && b <= q) || (p >= a && q <= b)) as i32,
             part_2 + ((q >= a) && (p <= b)) as i32,
         )
-    })
+    });
+    (part_1.to_string(), part_2.to_string())
 }
 
 fn parse_range(range: &str) -> (i32, i32) {
