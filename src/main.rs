@@ -3,6 +3,7 @@ mod day_02;
 mod day_03;
 mod day_04;
 mod day_05;
+mod day_06;
 
 /// https://adventofcode.com/2022
 fn main() {
@@ -12,6 +13,7 @@ fn main() {
         day_03::solve,
         day_04::solve,
         day_05::solve,
+        day_06::solve,
     ];
 
     for (i, solve) in solvers.iter().enumerate() {
